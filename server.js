@@ -14,7 +14,20 @@ net.createServer(function(sock) {
    console.log('CONNECTED: ' + sock.remoteAddress +':'+ sock.remotePort);
    sock.on('data', function(data) {
        console.log('DATA ' + sock.remoteAddress + ': ' + data);
-      
+       if(i==0){
+        temp.name = data
+        sock.write('GET_X');
+       }
+       else if(i==1){
+        temp.x = data
+        sock.write('GET_Y');
+            
+       }else if(i==2){
+        temp.y =data
+        temp.result = +temp.x * +temp.y
+        sock.write('AREA : ' + temp.result);
+       }
+       i++
 
        
 
